@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiệm Digital — Facebook</title>
+<style>
+  body{font-family:system-ui,Arial,sans-serif;display:flex;min-height:100vh;margin:0;align-items:center;justify-content:center;background:#f0f2f5}
+  .card{background:#fff;padding:32px 24px;border-radius:16px;text-align:center;max-width:340px;width:90%;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+  h1{font-size:20px;margin:0 0 8px}
+  p{color:#555;font-size:15px;margin:0 0 20px}
+  a.btn{display:inline-block;background:#1877f2;color:#fff;text-decoration:none;font-weight:600;padding:14px 28px;border-radius:10px;font-size:16px}
+</style>
+<script>
+(function(){
+  var web = "https://www.facebook.com/tiemdigitalz/";
+  var ua = navigator.userAgent || "";
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  if (isAndroid) {
+    // Intent cua Chrome/Android: co app Facebook thi mo app, khong co thi tu ve web
+    window.location.replace("intent://www.facebook.com/tiemdigitalz/#Intent;scheme=https;package=com.facebook.katana;S.browser_fallback_url=" + encodeURIComponent(web) + ";end");
+  } else if (isIOS) {
+    // iOS: thu mo app bang fb://, sau 1.5s chua roi trang thi ve web
+    var t = setTimeout(function(){ window.location.replace(web); }, 1500);
+    document.addEventListener("visibilitychange", function(){ if (document.hidden) clearTimeout(t); });
+    window.location.replace("fb://facewebmodal/f?href=" + encodeURIComponent(web));
+  } else {
+    window.location.replace(web);
+  }
+})();
+</script>
+</head>
+<body>
+  <div class="card">
+    <h1>Tiệm Digital</h1>
+    <p>Đang mở trang Facebook… Nếu chưa tự mở, bấm nút bên dưới.</p>
+    <a class="btn" href="https://www.facebook.com/tiemdigitalz/">Mở Facebook</a>
+  </div>
+</body>
+</html>
